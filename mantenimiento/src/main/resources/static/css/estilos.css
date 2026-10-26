@@ -1,0 +1,38 @@
+:root {
+    --color-primario: #0d3b66;
+    --color-primario-hover: #09294a;
+    --color-fondo: #f2f5f9;
+}
+
+body {
+    background-color: var(--color-fondo);
+}
+
+.fondo-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0d3b66, #1d6fa5);
+}
+
+.tarjeta-login {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    border-radius: 12px;
+}
+
+.btn-primario {
+    background-color: var(--color-primario);
+    color: #fff;
+}
+
+.btn-primario:hover {
+    background-color: var(--color-primario-hover);
+    color: #fff;
+}
+
+.barra-superior {
+    background-color: var(--color-primario);
+}
