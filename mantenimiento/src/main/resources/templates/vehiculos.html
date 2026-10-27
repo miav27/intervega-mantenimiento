@@ -11,6 +11,14 @@
     <!-- Barra superior -->
     <nav class="navbar navbar-expand barra-superior navbar-dark px-3">
         <span class="navbar-brand mb-0 h1">InterVega - Mantenimiento</span>
+        <!-- Cierra la sesión: debe ser POST para que Spring valide el token CSRF -->
+<form th:action="@{/logout}" method="post" style="margin:0; margin-left:auto;">
+    <button type="submit"
+            style="background:transparent; border:1px solid #fff; color:#fff;
+                   padding:6px 14px; border-radius:6px; cursor:pointer;">
+        Cerrar sesión
+    </button>
+</form>
         <ul class="navbar-nav me-auto">
             <li class="nav-item"><a class="nav-link" th:href="@{/kilometraje}">Kilometraje</a></li>
             <li class="nav-item"><a class="nav-link active" th:href="@{/vehiculos}">Vehículos</a></li>
