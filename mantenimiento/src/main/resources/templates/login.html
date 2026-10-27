@@ -3,33 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Iniciar sesión - InterVega</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Iniciar sesión - Transportes InterVega SAC</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
-<body class="fondo-login">
-    <main class="contenedor-login">
-        <div class="card tarjeta-login shadow">
-            <div class="card-body p-4">
-                <h1 class="h4 text-center mb-1">Transportes InterVega SAC</h1>
-                <p class="text-center text-muted mb-4">Sistema de Gestión de Mantenimiento Vehicular</p>
+<body class="login-page">
+    <div class="login-layout">
 
-                <form th:action="@{/login}" method="post">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="username" name="username" required autofocus>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <div class="alert alert-danger py-2" th:if="${param.error}">
-                        Usuario o contraseña incorrectos.
-                    </div>
-                    <button type="submit" class="btn btn-primario w-100">Ingresar</button>
-                </form>
+        <!-- PANEL IZQUIERDO: marca y mensaje -->
+        <aside class="login-hero">
+            <div class="hero-marca">
+                <div class="hero-logo">IV</div>
+                <div>
+                    <div class="hero-empresa">Transportes InterVega SAC</div>
+                    <div class="hero-sub">Gestión de mantenimiento vehicular</div>
+                </div>
             </div>
-        </div>
-    </main>
+
+            <div class="hero-contenido">
+                <span class="hero-badge">
+                    <i class="bi bi-shield-check"></i> OPERACIÓN SEGURA · 3 TALLERES CONECTADOS
+                </span>
+                <h1 class="hero-titulo">Mantenimiento bajo control.<br>Flota siempre en ruta.</h1>
+                <p class="hero-texto">
+                    Centraliza kilometraje, alertas y servicios para anticiparte a cada
+                    mantenimiento y mantener tus vehículos disponibles.
+                </p>
+                <ul class="hero-lista">
+                    <li><i class="bi bi-speedometer2"></i> Kilometraje al día</li>
+                    <li><i class="bi bi-bell"></i> Alertas preventivas</li>
+                    <li><i class="bi bi-clipboard-check"></i> Historial trazable</li>
+                </ul>
+            </div>
+
+            <div class="hero-pie">
+                <span><span class="punto-estado"></span> Sistema operativo</span>
+                <span>Versión 2.4.0</span>
+            </div>
+        </aside>
+
+        <!-- PANEL DERECHO: formulario -->
+        <main class="login-panel">
+            <div class="panel-superior">
+                <span class="badge-portal"><i class="bi bi-building"></i> Portal interno</span>
+                <a href="#" class="link-ayuda">¿Necesitas ayuda?</a>
+            </div>
+
+            <div class="panel-centro">
+                <!-- Marca visible solo en celular -->
+                <div class="marca-movil">
+                    <div class="hero-logo">IV</div>
+                    <span>Transportes InterVega SAC</span>
+                </div>
+
+                <section class="tarjeta-login">
+                    <h2>Bienvenido</h2>
+                    <p class="tarjeta-sub">Ingresa tus credenciales para acceder al sistema de mantenimiento.</p>
+
+                    <div class="alerta-login alerta-error" th:if="${param.error}">
+                        <i class="bi bi-exclamation-circle"></i> Usuario o contraseña incorrectos.
+                    </div>
+                    <div class="alerta-login alerta-ok" th:if="${param.logout}">
+                        <i class="bi bi-check-circle"></i> Cerraste sesión correctamente.
+                    </div>
+
+                    <form th:action="@{/login}" method="post">
+                        <label for="username" class="campo-label">Usuario</label>
+                        <div class="campo">
+                            <i class="bi bi-person campo-icono"></i>
+                            <input type="text" id="username" name="username"
+                                   placeholder="Ingresa tu usuario" autocomplete="username" required autofocus>
+                        </div>
+
+                        <label for="password" class="campo-label">Contraseña</label>
+                        <div class="campo">
+                            <i class="bi bi-lock campo-icono"></i>
+                            <input type="password" id="password" name="password"
+                                   placeholder="••••••••" autocomplete="current-password" required>
+                            <button type="button" class="campo-ojo" id="btnVerClave" aria-label="Mostrar u ocultar contraseña">
+                                <i class="bi bi-eye" id="iconoOjo"></i>
+                            </button>
+                        </div>
+
+                        <div class="fila-opciones">
+                            <label class="check">
+                                <input type="checkbox" name="remember-me"> Recordar usuario
+                            </label>
+                            <a href="#" class="link-ayuda">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <button type="submit" class="btn-ingresar">
+                            Iniciar sesión <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="caja-seguridad">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Acceso protegido y monitoreado para personal autorizado.</span>
+                    </div>
+                </section>
+            </div>
+
+            <footer class="panel-pie">
+                © 2026 Transportes InterVega SAC · Todos los derechos reservados
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Mostrar / ocultar contraseña
+        document.getElementById('btnVerClave').addEventListener('click', function () {
+            var campo = document.getElementById('password');
+            var icono = document.getElementById('iconoOjo');
+            var oculto = campo.type === 'password';
+            campo.type = oculto ? 'text' : 'password';
+            icono.className = oculto ? 'bi bi-eye-slash' : 'bi bi-eye';
+        });
+    </script>
 </body>
 </html>
+
