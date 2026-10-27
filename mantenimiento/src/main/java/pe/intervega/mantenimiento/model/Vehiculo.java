@@ -1,44 +1,17 @@
 package pe.intervega.mantenimiento.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-// Vehículo de la flota de InterVega
-@Entity
-@Table(name = "vehiculo")
+// Vehículo de la flota de InterVega (clase simple, sin anotaciones JPA)
 public class Vehiculo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_vehiculo")
     private Integer id;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "id_taller", nullable = false)
+    // Taller al que pertenece el vehículo
     private Taller taller;
-
-    @Column(nullable = false, unique = true, length = 10)
     private String placa;
-
-    @Column(length = 40)
     private String marca;
-
-    @Column(length = 40)
     private String modelo;
-
     private Integer anio;
-
-    @Column(name = "kilometraje_actual", nullable = false)
     private int kilometrajeActual = 0;
-
     // ACTIVO, EN_TALLER o BAJA
-    @Column(nullable = false, length = 15)
     private String estado = "ACTIVO";
 
     public Vehiculo() {
