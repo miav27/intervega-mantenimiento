@@ -1,44 +1,18 @@
 package pe.intervega.mantenimiento.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
 // Representa un usuario del sistema (Jefe de Taller o Administrador General)
-@Entity
-@Table(name = "usuario")
 public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
     private Integer id;
-
-    @Column(nullable = false, unique = true, length = 40)
     private String username;
-
     // Guarda solo el hash BCrypt, nunca la contraseña en texto plano
-    @Column(name = "password_hash", nullable = false, length = 60)
     private String passwordHash;
-
-    @Column(nullable = false, length = 80)
     private String nombres;
-
     // ADMIN_GENERAL o JEFE_TALLER
-    @Column(nullable = false, length = 20)
     private String rol;
-
     // Nulo para el Administrador General (acceso global)
-    @Column(name = "id_taller")
     private Integer idTaller;
-
-    @Column(nullable = false)
     private boolean estado = true;
-
-    @Column(name = "intentos_fallidos", nullable = false)
     private int intentosFallidos = 0;
 
     public Usuario() {
