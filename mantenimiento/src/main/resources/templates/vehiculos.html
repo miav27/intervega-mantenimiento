@@ -23,7 +23,6 @@
             <li class="nav-item"><a class="nav-link" th:href="@{/kilometraje}">Kilometraje</a></li>
             <li class="nav-item"><a class="nav-link active" th:href="@{/vehiculos}">Vehículos</a></li>
         </ul>
-        <form th:action="@{/logout}" method="post" class="d-flex">
             <button type="submit" class="btn btn-outline-light btn-sm">Cerrar sesión</button>
         </form>
     </nav>
@@ -40,7 +39,7 @@
 
         <div class="table-responsive bg-white rounded shadow-sm">
             <table class="table table-hover align-middle mb-0" id="tablaVehiculos">
-                <thead class="table-dark">
+                <thead class="encabezado-tabla">
                     <tr>
                         <th>Placa</th>
                         <th>Marca</th>
@@ -61,9 +60,9 @@
                         <td th:text="${v.taller.nombre}">Taller</td>
                         <td>
                             <!-- Colores tipo semáforo: verde = activo, amarillo = en taller, gris = baja -->
-                            <span class="badge"
-                                  th:classappend="${v.estado == 'ACTIVO'} ? 'bg-success' : (${v.estado == 'EN_TALLER'} ? 'bg-warning text-dark' : 'bg-secondary')"
-                                  th:text="${v.estado == 'EN_TALLER'} ? 'En taller' : (${v.estado == 'BAJA'} ? 'Baja' : 'Activo')">Activo</span>
+                            <span class="pill"
+                                th:classappend="${v.estado == 'ACTIVO'} ? ' pill-operativo' : (${v.estado == 'EN_TALLER'} ? ' pill-taller' : ' pill-baja')"th:text="${v.estado == 'EN_TALLER'} ? 'En taller' :
+                                (${v.estado == 'BAJA'} ? 'Baja' : 'Activo')"> </span>
                         </td>
                     </tr>
                     <tr th:if="${#lists.isEmpty(vehiculos)}">
@@ -85,4 +84,3 @@
     </script>
 </body>
 </html>
-
