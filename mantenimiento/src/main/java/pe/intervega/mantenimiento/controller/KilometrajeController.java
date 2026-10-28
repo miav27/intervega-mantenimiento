@@ -34,6 +34,9 @@ public class KilometrajeController {
     @GetMapping("/kilometraje")
     public String mostrar(Authentication auth, Model model) {
         Usuario usuario = usuarioService.obtenerPorUsername(auth.getName());
+        // Saludo según el rol del usuario que inició sesión
+        String titulo = "ADMIN_GENERAL".equals(usuario.getRol()) ? "ADMINISTRADOR" : "JEFE DE TALLER";
+        model.addAttribute("saludo", "Bienvenido " + titulo);
         // idTaller null (Administrador General) = ve todos los talleres
         model.addAttribute("registros", kilometrajeService.listarRecientes(usuario.getIdTaller()));
         // Alertas pendientes del taller del usuario (null = todos los talleres)
