@@ -13,6 +13,7 @@
   <body>
     <nav class="navbar barra-superior navbar-dark px-3">
       <span class="navbar-brand mb-0 h1">InterVega - Mantenimiento</span>
+      <span style="margin-left:auto; color:#fff; margin-right:12px;" th:text="${saludo}">Bienvenido ADMINISTRADOR</span>
       <!-- Cierra la sesión: debe ser POST para que Spring valide el token CSRF -->
       <form
         th:action="@{/logout}"
