@@ -38,39 +38,44 @@
         </div>
     </div>
 
-<div th:if="${alerta}"
-     class="alerta-panel"
-     th:classappend="${estado == 'VERDE'} ? ' estado-verde' :
-                     (${estado == 'AMARILLO'} ? ' estado-amarillo' :
-                     ' estado-rojo')">
-
-    <strong th:text="${tituloAlerta}">
-        Estado del vehículo
-    </strong>
-
-    <br>
-
-    <span th:text="${alerta}">
-        Mensaje de alerta
-    </span>
-
-</div>
-
-    <div th:if="${not #lists.isEmpty(alertas)}"
-     class="alerta-mantenimiento mb-4">
-
-    ⚠️ <strong>
-        Existen alertas de mantenimiento pendientes.
-    </strong>
-
-</div>
 
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-body">
+            
+        <div class="alert alert-success"
+             th:if="${exito}"
+             th:text="${exito}">
+        </div>
 
-            <form class="row g-3"
-                  th:action="@{/kilometraje}"
-                  method="post">
+        <div class="alert alert-danger"
+             th:if="${error}"
+             th:text="${error}">
+        </div>
+
+        <!-- Alertas de mantenimiento pendientes (RF03) -->
+        <div class="alert alert-warning"
+             th:each="a : ${alertas}">
+
+            <strong th:text="${a.placa}">
+                ABC-123
+            </strong>:
+
+            <span th:text="${a.tipoNombre}">
+                Cambio de aceite
+            </span>
+
+            - programado a los
+
+            <span th:text="${a.kmProgramado}">
+                50000
+            </span>
+
+            km
+        </div>
+
+        <form class="row g-3"
+              th:action="@{/kilometraje}"
+              method="post">
                   <div class="col-md-3">
         <label for="placa" class="form-label">Placa</label>
         <input type="text"
@@ -111,16 +116,7 @@
     </button>
 </div>
             </form>
-
-        <div class="alert alert-success"
-        th:if="${exito}"
-        th:text="${exito}">
-        </div>
-
-<div class="alert alert-danger"
-     th:if="${error}"
-     th:text="${error}">
-</div>        
+       
 
 <div class="tabla-card">
     <div class="tabla-scroll">
@@ -150,9 +146,7 @@
         </table>
     </div>
 </div>
-
-            </table>
-        </div>
-    </div>
+</div>
+</div>
 </body>
 </html>
