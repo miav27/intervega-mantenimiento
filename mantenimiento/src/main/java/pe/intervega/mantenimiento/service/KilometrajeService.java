@@ -20,14 +20,17 @@ public class KilometrajeService {
     private final KilometrajeDAO kilometrajeDAO;
     private final VehiculoDAO vehiculoDAO;
     private final KilometrajeValidador validador;
+    private final AlertaService alertaService;
 
     // Depende de interfaces, no de implementaciones (inversión de dependencias)
     public KilometrajeService(KilometrajeDAO kilometrajeDAO, VehiculoDAO vehiculoDAO,
-                              KilometrajeValidador validador) {
+                              KilometrajeValidador validador, AlertaService alertaService) {
         this.kilometrajeDAO = kilometrajeDAO;
         this.vehiculoDAO = vehiculoDAO;
         this.validador = validador;
+        this.alertaService = alertaService;
     }
+    
 
     // idTallerUsuario es null para el Administrador General (puede registrar en cualquier taller)
     // @Transactional: si falla la actualización del vehículo, no se guarda el registro
@@ -57,6 +60,8 @@ public class KilometrajeService {
 
         kilometrajeDAO.guardar(registro);
         kilometrajeDAO.actualizarKilometrajeVehiculo(vehiculo.getId(), kilometraje);
+        // RF03: con el kilometraje ya actualizado, se revisa si toca algún mantenimiento
+        alertaService.evaluar(vehiculo.getId(), kilometraje);  
         log.info("Kilometraje registrado: placa {} con {} km", placaNormalizada, kilometraje);
     }
 
