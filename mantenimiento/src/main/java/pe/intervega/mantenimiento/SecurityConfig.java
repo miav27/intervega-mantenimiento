@@ -33,9 +33,11 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // Esto proporciona el codificador BCrypt para almacenar
+    // Esto proporciona el codificador BCrypt para almacenar y
     // verificar las contraseñas mediante hashes.
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
