@@ -18,7 +18,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                // Rutas públicas: login y archivos estáticos (css, js, imágenes)
+                // El login es público 
+                // El diseño pueden cargarse sin iniciar sesión 
                 .requestMatchers("/login", "/css/**", "/js/**", "/img/**").permitAll()
                 // Todo lo demás exige haber iniciado sesión
                 .anyRequest().authenticated()
@@ -32,8 +33,8 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // Cifra y compara contraseñas con BCrypt (nunca se guardan en texto plano)
-    @Bean
+    // Esto proporciona el codificador BCrypt para almacenar
+    // verificar las contraseñas mediante hashes.
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

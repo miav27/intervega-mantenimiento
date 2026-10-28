@@ -33,7 +33,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Optional<Usuario> buscarPorUsername(String username) {
-        // El signo ? es un parámetro: el valor nunca se concatena al SQL (evita inyección SQL)
+//El signo ? permite pasar el nombre de usuario como parámetro,
+// en lugar de concatenarlo directamente al SQL.
         String sql = "SELECT u.id_usuario, u.username, u.password_hash, u.nombres, "
                    + "r.nombre AS rol, u.id_taller, u.estado, u.intentos_fallidos "
                    + "FROM usuario u JOIN rol r ON r.id_rol = u.id_rol "

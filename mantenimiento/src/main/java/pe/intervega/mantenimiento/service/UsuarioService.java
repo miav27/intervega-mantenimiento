@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import pe.intervega.mantenimiento.dao.UsuarioDAO;
 import pe.intervega.mantenimiento.model.Usuario;
 
-// Lógica de usuarios: Spring Security la usa para autenticar contra MySQL
+// Este archivo comprueba la identidad del usuario
+
 @Service
+//Implementaste la interfaz de Spring Security
 public class UsuarioService implements UserDetailsService {
 
     private static final Logger log = LoggerFactory.getLogger(UsuarioService.class);
@@ -25,17 +27,21 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
+        //buscarPorUsername(username): busca al usuario en MySQL.
         Usuario u = usuarioDAO.buscarPorUsername(username)
             .orElseThrow(() -> {
                 log.warn("Intento de inicio de sesión con usuario inexistente: {}", username);
                 return new UsernameNotFoundException("Usuario no encontrado");
             });
-
+        //getUsername(): obtiene su nombre de usuario.
         log.info("Usuario cargado para autenticación: {}", u.getUsername());
 
         return User.withUsername(u.getUsername())
+        //getPasswordHash(): obtiene la contraseña cifrada
             .password(u.getPasswordHash())
+        //roles(u.getRol()): asigna su rol.    
             .roles(u.getRol())
+        //disabled(!u.isEstado()): impide el acceso si la cuenta está deshabilitada.    
             .disabled(!u.isEstado())
             .build();
     }
