@@ -6,7 +6,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +19,8 @@ import pe.intervega.mantenimiento.dao.VehiculoDAO;
 import pe.intervega.mantenimiento.model.RegistroKilometraje;
 import pe.intervega.mantenimiento.model.Taller;
 import pe.intervega.mantenimiento.model.Vehiculo;
+import static org.mockito.ArgumentMatchers.anyInt;
+
 
 @ExtendWith(MockitoExtension.class)
 class KilometrajeServiceTest {
@@ -31,12 +32,15 @@ class KilometrajeServiceTest {
     @Mock
     private VehiculoDAO vehiculoDAO;
 
+    @Mock
+    private AlertaService alertaService;
+
     private KilometrajeService servicio;
 
     @BeforeEach
     void preparar() {
         // El validador es lógica pura, se usa el real
-        servicio = new KilometrajeService(kilometrajeDAO, vehiculoDAO, new KilometrajeValidador());
+                servicio = new KilometrajeService(kilometrajeDAO, vehiculoDAO, new KilometrajeValidador(), alertaService);
     }
 
     // Vehículo de prueba: id 1, placa ABC-123, 45200 km, del taller 10
@@ -64,6 +68,8 @@ class KilometrajeServiceTest {
         assertEquals(10, captor.getValue().getIdTaller().intValue());
         assertEquals(46000, captor.getValue().getKilometraje());
         verify(kilometrajeDAO).actualizarKilometrajeVehiculo(1, 46000);
+        // Al registrar kilometraje se evalúan las alertas del vehículo
+        verify(alertaService).evaluar(1, 46000);
     }
 
     @Test
@@ -92,5 +98,7 @@ class KilometrajeServiceTest {
         assertThrows(IllegalArgumentException.class,
             () -> servicio.registrar("ABC-123", 40000, null, 1, null));
         verify(kilometrajeDAO, never()).guardar(any());
+        // Si el dato es inválido, no se evalúan alertas
+        verify(alertaService, never()).evaluar(anyInt(), anyInt());
     }
 }
