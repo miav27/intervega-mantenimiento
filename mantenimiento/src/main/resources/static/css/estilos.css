@@ -792,3 +792,21 @@ body {
     margin-bottom: 1rem;
     font-weight: 500;
 }
+.semaforo {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.semaforo-rojo {
+    background: #dc3545;
+}
+
+.semaforo-verde {
+    background: #198754;
+}
+
+.semaforo-amarillo {
+    background: #ffc107;
+}

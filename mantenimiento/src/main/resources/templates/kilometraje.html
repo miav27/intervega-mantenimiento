@@ -126,6 +126,7 @@
                         <th>Placa</th>
                         <th>Kilometraje</th>
                         <th>Fecha</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
 <tbody>
@@ -135,10 +136,22 @@
         <td th:text="${#temporals.format(r.fechaRegistro, 'dd/MM/yyyy HH:mm')}">
             20/10/2026 08:00
         </td>
+        <td>
+    <!-- Rojo si el vehículo tiene alguna alerta pendiente; verde si no -->
+    <span th:if="${#lists.contains(alertas.![placa], r.placa)}"
+          class="semaforo semaforo-rojo"
+          title="Mantenimiento pendiente">
+    </span>
+
+    <span th:unless="${#lists.contains(alertas.![placa], r.placa)}"
+          class="semaforo semaforo-verde"
+          title="Al día">
+    </span>
+</td>
     </tr>
 
     <tr th:if="${#lists.isEmpty(registros)}">
-        <td colspan="3" class="text-center text-muted">
+        <td colspan="4" class="text-center text-muted">
             Aún no hay registros de kilometraje.
         </td>
     </tr>
