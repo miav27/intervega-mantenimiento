@@ -38,12 +38,32 @@
         </div>
     </div>
 
-    <div th:if="${alerta}"
-        class="alerta-mantenimiento mb-4">
+<div th:if="${alerta}"
+     class="alerta-panel"
+     th:classappend="${estado == 'VERDE'} ? ' estado-verde' :
+                     (${estado == 'AMARILLO'} ? ' estado-amarillo' :
+                     ' estado-rojo')">
 
-        ⚠️ <strong>Mantenimiento preventivo:</strong>
-        <span th:text="${alerta}"></span>
-    </div>
+    <strong th:text="${tituloAlerta}">
+        Estado del vehículo
+    </strong>
+
+    <br>
+
+    <span th:text="${alerta}">
+        Mensaje de alerta
+    </span>
+
+</div>
+
+    <div th:if="${not #lists.isEmpty(alertas)}"
+     class="alerta-mantenimiento mb-4">
+
+    ⚠️ <strong>
+        Existen alertas de mantenimiento pendientes.
+    </strong>
+
+</div>
 
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-body">

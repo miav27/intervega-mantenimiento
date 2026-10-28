@@ -768,3 +768,27 @@ body {
     background: #fff8e1;
     color: #7a5b00;
 }
+.estado-verde {
+    background: #e8f8f0;
+    color: #138a4f;
+    border-left: 5px solid #138a4f;
+}
+
+.estado-amarillo {
+    background: #fff8e1;
+    color: #b58105;
+    border-left: 5px solid #e6a700;
+}
+
+.estado-rojo {
+    background: #fdecec;
+    color: #c62828;
+    border-left: 5px solid #c62828;
+}
+
+.alerta-panel {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
