@@ -42,11 +42,14 @@ public class KilometrajeController {
     }
 
     // Recibe el formulario y registra el kilometraje
-    @PostMapping("/kilometraje")
-    public String registrar(@RequestParam String placa,
+    @PostMapping("/kilometraje")//indica que recibe la solicitud post
+    //Recibe los datos del formulario
+    public String registrar(@RequestParam String placa, 
                             @RequestParam int kilometraje,
                             @RequestParam(required = false) String observacion,
+                            //Identifica al usuario que inicio sesion
                             Authentication auth,
+                            //Permite enviar mensaje de exito o error a la vista
                             RedirectAttributes mensajes) {
         Usuario usuario = usuarioService.obtenerPorUsername(auth.getName());
         try {
