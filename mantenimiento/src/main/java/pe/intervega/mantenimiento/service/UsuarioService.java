@@ -39,4 +39,9 @@ public class UsuarioService implements UserDetailsService {
             .disabled(!u.isEstado())
             .build();
     }
+        // Devuelve el usuario completo (id, taller, rol) a partir del nombre de usuario logueado
+    public Usuario obtenerPorUsername(String username) {
+        return usuarioDAO.buscarPorUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+    }
 }
