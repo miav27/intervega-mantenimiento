@@ -13,7 +13,7 @@ import pe.intervega.mantenimiento.service.KilometrajeService;
 import pe.intervega.mantenimiento.service.UsuarioService;
 import pe.intervega.mantenimiento.service.AlertaService;
 
-// Controlador del RF02: muestra y registra el kilometraje (solo recibe y delega al servicio)
+// S:solo recibe y responde
 @Controller
 public class KilometrajeController {
 

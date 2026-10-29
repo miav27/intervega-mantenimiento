@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import pe.intervega.mantenimiento.dao.KilometrajeDAO;
 import pe.intervega.mantenimiento.model.RegistroKilometraje;
 
+//S:solo hace SQL
 @Repository
 public class KilometrajeDAOImpl implements KilometrajeDAO {
 

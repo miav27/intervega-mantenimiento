@@ -11,7 +11,7 @@ import pe.intervega.mantenimiento.dao.VehiculoDAO;
 import pe.intervega.mantenimiento.model.RegistroKilometraje;
 import pe.intervega.mantenimiento.model.Vehiculo;
 
-// Lógica del RF02: registrar el kilometraje de un vehículo al ingresar al taller
+// D: recibe KilometrajeDAO y VehiculoDAO (interfaces) por constructor, y por eso las pruebas usan DAO falsos
 @Service
 public class KilometrajeService {
 

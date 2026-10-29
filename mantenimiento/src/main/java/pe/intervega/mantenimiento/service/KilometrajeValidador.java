@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import com.google.common.base.Preconditions;
-
+//S: solo valida
 // Reglas de negocio para registrar kilometraje (no depende de la base de datos)
 @Component
 public class KilometrajeValidador {

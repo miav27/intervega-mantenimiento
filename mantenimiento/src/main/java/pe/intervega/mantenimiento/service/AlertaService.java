@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import pe.intervega.mantenimiento.dao.AlertaDAO;
 import pe.intervega.mantenimiento.model.AlertaMantenimiento;
 import pe.intervega.mantenimiento.model.TipoMantenimiento;
-
+//S: solo decide alertas
+//O:Los intervalos viven en la tabla tipo_mantenimiento
+//agregar un mantenimiento nuevo no requiere cambiar AlertaService	
 // Lógica del RF03: genera alertas cuando un vehículo alcanza el intervalo de mantenimiento
 @Service
 public class AlertaService {
